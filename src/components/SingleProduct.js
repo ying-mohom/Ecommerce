@@ -4,6 +4,7 @@ import { Rating } from "./Rating";
 
 
 export const SingleProduct = ({ prod }) => {
+    console.log("image:", prod.image)
     // const {
     //     state: { cart },
     //     dispatch,
@@ -14,7 +15,7 @@ export const SingleProduct = ({ prod }) => {
     // console.log("dispatch", dispatch);
     // console.log(cart)
     // console.log(product)
-    console.log("prod:", prod)
+    // console.log("prod:", prod)
     return (
         <div className="products">
             <Card>
