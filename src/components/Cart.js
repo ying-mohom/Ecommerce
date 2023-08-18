@@ -20,14 +20,14 @@ const Cart = () => {
     return (
         <div className="home">
             <div className="productContainer">
-                <ListGroup>
+                <ListGroup className="cartContainer">
                     {cart.map((prod) => (
-                        <ListGroup.Item key={prod.id}>
+                        <ListGroup.Item key={prod.id} >
                             <Row>
                                 <Col md={2}>
                                     <Image src={prod.image} alt={prod.name} fluid rounded />
                                 </Col>
-                                <Col md={2}>
+                                <Col md={3}>
                                     <span>{prod.name}</span>
                                 </Col>
                                 <Col md={2}>MMK {prod.price}</Col>
@@ -53,7 +53,7 @@ const Cart = () => {
                                         ))}
                                     </Form.Control>
                                 </Col>
-                                <Col md={2}>
+                                <Col md={1}>
                                     <Button
                                         type="button"
                                         variant="light"

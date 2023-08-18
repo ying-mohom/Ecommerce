@@ -4,15 +4,13 @@ import { cartReducer, productReducer } from "./Reducer";
 
 
 
-
+// const ImageUrl = "https://dog.ceo/api/breeds/image/random/21"
 
 export const Cart = createContext();
 faker.seed(99);
 
 function Context({ children }) {
-    const [dogImageUrls, setDogImageUrls] = useState([]);
-    // const [products, setProducts] = useState([]);
-
+    const [Images, setImages] = useState([]);
     let products = [...Array(21)].map(() => ({
         id: faker.string.uuid(),
         name: faker.commerce.productName(),
@@ -22,72 +20,42 @@ function Context({ children }) {
         fastDelivery: faker.datatype.boolean(),
         ratings: faker.helpers.arrayElement([1, 2, 3, 4, 5]),
     }));
-    let updatedProducts = [];
     let photos = [];
 
-    const ImageUrl = "https://dog.ceo/api/breed/hound/images/random/21";
+    const apiKey = '38729788-97e0cf53ae4b8e9a1083cf93d';
+    const searchQuery = 'flower'; // Replace with the product you're searching for
+    const perPage = 21;
+    const minImageWidth = 3840; // Minimum width for 4K resolution
+    const minImageHeight = 2160; // Minimum height for 4K resolution
+
+    // Set the orientation based on your preference (horizontal or vertical)
+    const orientation = 'horizontal'; // 'horizontal' or 'vertical'
+
+    const imageUrl = `https://pixabay.com/api/?key=${apiKey}&q=${encodeURIComponent(
+        searchQuery
+    )}&per_page=${perPage}&image_type=photo&orientation=${orientation}&min_width=${minImageWidth}&min_height=${minImageHeight}`;
+
     const fetchData = () => {
-        fetch(ImageUrl)
+        fetch(imageUrl)
             .then(response => response.json())
             .then(data => {
-                photos = data.message;
-                // console.log("photos", photos);
+                photos = data.hits;
                 for (let index = 0; index < 21; index++) {
-                    products[index].image = photos[index];
-                    console.log(index, photos[index]);
+                    products[index].image = photos[index].previewURL;
+                    console.log(index, photos[index].previewURL);
                 }
-                // updatedProducts = products.reduce((accumulator, product, index) => {
-                //     const updatedProduct = {
-                //         ...product,
-                //         image: photos[index],
-                //     };
-                //     return [...accumulator, updatedProduct];
-                // }, []);
-                // console.log("updated", updatedProducts);
-
-                // newProducts = photos.map((photo, j) => {
-                //     return;
-                // // })
-                // console.log("products", products);
-                // console.log("newProducts", newProducts);
-                setDogImageUrls(data.message);
-
-                // Call function to update products
+                setImages(data.hits);
             })
             .catch(error => console.error('Error fetching data:', error));
     };
 
     useEffect(() => {
         fetchData();
-        // console.log("updatedProducts0", updatedProducts);
+
     }, []);
 
-    // const updateProducts = (imageUrls) => {
-    //     const newProducts = imageUrls.map((imageUrl, index) => ({
-    //         id: faker.string.uuid(),
-    //         name: faker.commerce.productName(),
-    //         price: faker.commerce.price(),
-    //         image: imageUrl,
-    //         inStock: faker.helpers.arrayElement([0, 3, 5, 6, 7]),
-    //         fastDelivery: faker.datatype.boolean(),
-    //         ratings: faker.helpers.arrayElement([1, 2, 3, 4, 5]),
-    //     }));
-    //     setProducts(newProducts);
-    // };
 
-
-
-
-    // console.log("products:", products)
-
-
-
-    // dogImageUrls.map((dogImage, j) => {
-    //     // console.log("faker images ", products[j].image);
-    //     products[j].image = dogImage;
-    // });
-
-
+    console.log("Products detail:", products)
     const [state, dispatch] = useReducer(cartReducer, {
         products: products,
         cart: []

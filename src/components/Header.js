@@ -7,16 +7,18 @@ import { FaShoppingCart } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { CartState } from '../context/Context';
 import { AiFillDelete } from 'react-icons/ai';
+import logo from "../assets/mylogo.png";
 import "./style.css";
 
 function Header() {
     const { state: { cart }, dispatch, productDispatch } = CartState();
     return (
         <>
-            <Navbar bg="dark" variant='dark' style={{ height: 80 }}>
+            <Navbar bg="dark" variant='dark' style={{ height: 80 }} className='navbar'>
                 <Container>
                     <Navbar.Brand>
-                        <Link to='/'>Ying's Store</Link>
+                        <Link to='/'><img src={logo} className='img' style={{ width: 50, height: 50 }} /></Link>
+                        <Link to='/' >Ying's Store</Link>
                     </Navbar.Brand>
                     <Navbar.Text className='search'>
                         <FormControl style={{ width: 500 }} placeholder='Search a product'

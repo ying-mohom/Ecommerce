@@ -2,8 +2,7 @@ import { Button, Form } from "react-bootstrap";
 import { CartState } from "../context/Context";
 import { Rating } from "./Rating";
 import { useState } from "react";
-// import Rating from "./Rating";
-// import Filters from './Filters';
+
 
 const Filters = () => {
     const {
