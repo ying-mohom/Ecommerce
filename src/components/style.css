@@ -121,6 +121,39 @@
     width: 30%;
 }
 
+/*Pagination*/
+/* customPagination.css */
+
+.pagination-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pagination-container li {
+    display: inline;
+}
+
+.pagination-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ccc;
+    margin: 0 5px;
+    cursor: pointer;
+    font-size: 14px;
+    padding: 10px 20px;
+}
+
+
+
+.pagination-item.active {
+    background-color: #007bff;
+    color: white;
+}
 
 
 /* Media Queries */

@@ -19,7 +19,7 @@ export const SingleProduct = ({ prod }) => {
     return (
         <div className="products">
             <Card>
-                <Card.Img variant="top" src={prod.image} alt={prod.name} style={{ height: 230 }} />
+                <Card.Img variant="top" src={prod.image} alt={prod.name} style={{ height: 200 }} />
                 <Card.Body>
                     <Card.Title>{prod.name}</Card.Title>
                     <Card.Subtitle style={{ paddingBottom: 10 }}>

@@ -11,6 +11,8 @@ faker.seed(99);
 
 function Context({ children }) {
     const [Images, setImages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+
     let products = [...Array(21)].map(() => ({
         id: faker.string.uuid(),
         name: faker.commerce.productName(),
@@ -20,10 +22,11 @@ function Context({ children }) {
         fastDelivery: faker.datatype.boolean(),
         ratings: faker.helpers.arrayElement([1, 2, 3, 4, 5]),
     }));
+    console.log("Products before update:", products);
     let photos = [];
 
     const apiKey = '38729788-97e0cf53ae4b8e9a1083cf93d';
-    const searchQuery = 'flowers'; // Replace with the product you're searching for
+    const searchQuery = 'flowers';
     const perPage = 21;
     const minImageWidth = 3840; // Minimum width for 4K resolution
     const minImageHeight = 2160; // Minimum height for 4K resolution
@@ -36,28 +39,32 @@ function Context({ children }) {
     )}&per_page=${perPage}&image_type=photo&orientation=${orientation}&min_width=${minImageWidth}&min_height=${minImageHeight}`;
 
     const fetchData = () => {
+        // setIsLoading(true)
         fetch(imageUrl)
             .then(response => response.json())
             .then(data => {
-                photos = data.hits;
+                photos = data.hits;  //Data is return in json array object format and use data.hits to access wanted property
                 for (let index = 0; index < 21; index++) {
                     products[index].image = photos[index].previewURL;
                     console.log(index, photos[index].previewURL);
                 }
                 setImages(data.hits);
+                // setIsLoading(false);
             })
             .catch(error => console.error('Error fetching data:', error));
     };
 
     useEffect(() => {
         fetchData();
-
     }, []);
 
 
     console.log("Products detail:", products)
+    console.log("loading:", isLoading)
+
     const [state, dispatch] = useReducer(cartReducer, {
         products: products,
+        loading: isLoading,
         cart: []
     });
 
