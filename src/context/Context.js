@@ -23,7 +23,7 @@ function Context({ children }) {
     let photos = [];
 
     const apiKey = '38729788-97e0cf53ae4b8e9a1083cf93d';
-    const searchQuery = 'flower'; // Replace with the product you're searching for
+    const searchQuery = 'flowers'; // Replace with the product you're searching for
     const perPage = 21;
     const minImageWidth = 3840; // Minimum width for 4K resolution
     const minImageHeight = 2160; // Minimum height for 4K resolution
